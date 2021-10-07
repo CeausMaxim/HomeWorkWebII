@@ -12,21 +12,31 @@ import javax.servlet.http.HttpServletResponse;
 
 @RestController
 public class Ex2Cookies {
-    @GetMapping("2a")
-    // punctul a
-    public Cookie[] method1(HttpServletRequest httpServletRequest) {
-        return httpServletRequest.getCookies();
+    private static final String MY_COOKIE = "cookieForIS31Z";
+
+    @GetMapping("/cookies/add")
+    public String addCookie(HttpServletResponse response) {
+        Cookie uiColorCookie = new
+                Cookie(MY_COOKIE, "keep_silent_and_calm_be_better");
+        response.addCookie(uiColorCookie);
+        return "Cookie added, please check!";
     }
 
-    @GetMapping("2b")
+    @GetMapping("/cookies/my-cookie")
+    public String addCookie(HttpServletRequest request, @CookieValue(name
+            = MY_COOKIE, required = false) String cookieValue) {
+        return "My cookie value is:" + Objects.toString(cookieValue);
+    }
+
+    @GetMapping("/cookies/2b")
     // punctul b
     public String method2(HttpServletRequest httpServletRequest) {
-        return "lista de antete cerere - getHeader  "+httpServletRequest.getHeader("headers");
+        return "lista de antete cerere: " + httpServletRequest.getHeader("headers");
     }
 
-    @GetMapping("2c")
+    @GetMapping("/cookies/2c")
     // punctul c
     public String method3(HttpServletRequest httpServletRequest) {
-        return "lista de parametri din query string - getHeaderNames()  "+httpServletRequest.getHeaderNames().toString();
+        return "lista de parametri din query string: " + httpServletRequest.getHeaderNames().toString();
     }
 }

@@ -13,7 +13,6 @@ public class Ex1Controller {
         // punctul a
         return "getServletPath: " + httpServletRequest.getRequestURL();
     }
-
     @GetMapping("p2")
     public String method2(HttpServletRequest httpServletRequest) {
         // punctul b
